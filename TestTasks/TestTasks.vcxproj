@@ -22,19 +22,12 @@
     <ClInclude Include="headers\Group.h" />
     <ClInclude Include="headers\GroupUI.h" />
     <ClInclude Include="headers\Student.h" />
-    <ClInclude Include="src\GroupUI.h" />
-    <ClInclude Include="src\Group.h" />
-    <ClInclude Include="src\Student.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Group.cpp" />
     <ClCompile Include="source\GroupUI.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Student.cpp" />
-    <ClCompile Include="src\GroupUI.cpp" />
-    <ClCompile Include="src\Group.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Student.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
