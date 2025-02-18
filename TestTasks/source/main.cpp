@@ -1,4 +1,4 @@
-#include "GroupUI.h"
+#include "../headers/GroupUI.h"
 
 int main() {
     GroupUI::Run();

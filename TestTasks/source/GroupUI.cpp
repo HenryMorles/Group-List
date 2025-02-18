@@ -1,4 +1,4 @@
-﻿#include "GroupUI.h"
+﻿#include "../headers/GroupUI.h"
 #include <iostream>
 
 void GroupUI::Run() {
@@ -105,8 +105,8 @@ void GroupUI::FindStudent(Group& group) {
 
     try {
         const Student& student = group.Find(firstName, lastName);
-        std::cout << "Student found: " << student._firstName << " " << student._lastName << " ("
-            << student._recBookNumber << ")\n";
+        std::cout << "Student found: " << student.getFirstName() << " " << student.getLastName() << " ("
+            << student.getRecBookNumber() << ")\n";
     }
     catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
@@ -126,10 +126,10 @@ void GroupUI::ShowStudents(const Group& group) {
     const auto& students = group.GetStudents();
 
     for (const auto& student : students) {
-        std::cout << "Record book number: " << student._recBookNumber
-            << ", First name: " << student._firstName
-            << ", Last name: " << student._lastName
-            << ", Specialization: " << student._specialization
+        std::cout << "Record book number: " << student.getRecBookNumber()
+            << ", First name: " << student.getFirstName()
+            << ", Last name: " << student.getLastName()
+            << ", Specialization: " << student.getSpecialization()
             << std::endl;
     }
 }

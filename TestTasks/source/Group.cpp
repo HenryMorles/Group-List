@@ -1,11 +1,11 @@
-﻿#include "Group.h"
+﻿#include "../headers/Group.h"
 #include <stdexcept>
 
 
 Student* Group::FindStudentByRecBookNumber(int recBookNumber)
 {
 	auto it = std::find_if(_students.begin(), _students.end(),
-		[recBookNumber](Student& student) { return student._recBookNumber == recBookNumber; });
+		[recBookNumber](Student& student) { return student.getRecBookNumber() == recBookNumber; });
 
 	return (it != _students.end()) ? &(*it) : nullptr;
 }
@@ -13,7 +13,7 @@ Student* Group::FindStudentByRecBookNumber(int recBookNumber)
 const Student* Group::FindStudentByRecBookNumber(int recBookNumber) const
 {
 	auto it = std::find_if(_students.begin(), _students.end(),
-		[recBookNumber](const Student& student) { return student._recBookNumber == recBookNumber; });
+		[recBookNumber](const Student& student) { return student.getRecBookNumber() == recBookNumber; });
 
 	return (it != _students.end()) ? &(*it) : nullptr;
 }
@@ -32,7 +32,7 @@ void Group::EditFirstName(int recBookNumber, const std::string& newFirstName)
 {
 	Student* student = FindStudentByRecBookNumber(recBookNumber);
 	if (student) {
-		student->_firstName = newFirstName;
+		student->setFirstName(newFirstName);
 	}
 	else {
 		throw std::runtime_error("Student is not found");
@@ -43,7 +43,7 @@ void Group::EditLastName(const int recBookNumber, const std::string& newLastName
 {
 	Student* student = FindStudentByRecBookNumber(recBookNumber);
 	if (student) {
-		student->_lastName = newLastName;
+		student->setLastName(newLastName);
 	}
 	else {
 		throw std::runtime_error("Student is not found");
@@ -54,7 +54,7 @@ void Group::EditSpecialization(const int recBookNumber, const Specialization new
 {
 	Student* student = FindStudentByRecBookNumber(recBookNumber);
 	if (student) {
-		student->_specialization = newSpecialization;
+		student->setSpecialization(newSpecialization);
 	}
 	else {
 		throw std::runtime_error("Student is not found");
@@ -85,7 +85,7 @@ std::unique_ptr<Student> Group::Delete(int recBookNumber)
 		auto removedStudent = std::make_unique<Student>(std::move(*student));
 
 		_students.erase(std::remove_if(_students.begin(), _students.end(),
-			[recBookNumber](const Student& s) { return s._recBookNumber == recBookNumber; }), _students.end());
+			[recBookNumber](const Student& s) { return s.getRecBookNumber() == recBookNumber; }), _students.end());
 
 		return removedStudent;
 	}
@@ -97,7 +97,7 @@ const Student& Group::Find(const std::string& firstName, const std::string& last
 {
 	auto it = std::find_if(_students.begin(), _students.end(),
 		[&firstName, &lastName](const Student& student) {
-			return student._firstName == firstName && student._lastName == lastName;
+			return student.getFirstName() == firstName && student.getLastName() == lastName;
 		});
 
 	if (it != _students.end()) {

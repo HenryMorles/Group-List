@@ -19,11 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Group.h" />
+    <ClInclude Include="headers\GroupUI.h" />
+    <ClInclude Include="headers\Student.h" />
     <ClInclude Include="src\GroupUI.h" />
     <ClInclude Include="src\Group.h" />
     <ClInclude Include="src\Student.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Group.cpp" />
+    <ClCompile Include="source\GroupUI.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Student.cpp" />
     <ClCompile Include="src\GroupUI.cpp" />
     <ClCompile Include="src\Group.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -81,6 +88,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>E:\Projects\C++\Group-List\TestTasks\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <SourcePath>E:\Projects\C++\Group-List\TestTasks\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>E:\Projects\C++\Group-List\TestTasks\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>E:\Projects\C++\Group-List\TestTasks\source;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
