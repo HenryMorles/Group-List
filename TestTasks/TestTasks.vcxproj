@@ -19,15 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\ConsoleUI.h" />
     <ClInclude Include="headers\Group.h" />
-    <ClInclude Include="headers\GroupUI.h" />
     <ClInclude Include="headers\Student.h" />
+    <ClInclude Include="headers\UserInterface.h" />
+    <ClInclude Include="headers\MenuManager.h" />
+    <ClInclude Include="headers\MenuActions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\MenuActions.cpp" />
+    <ClCompile Include="source\MenuManager.cpp" />
+    <ClCompile Include="source\ConsoleUI.cpp" />
     <ClCompile Include="source\Group.cpp" />
-    <ClCompile Include="source\GroupUI.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Student.cpp" />
+    <ClCompile Include="source\UserInterface.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
