@@ -3,3 +3,4 @@
 *.obj
 /TestTasks/x64
 /x64
+*.user
