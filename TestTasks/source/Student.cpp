@@ -1,6 +1,6 @@
 #include "../headers/Student.h"
 
-Student::Student(const std::string& firstName, const std::string& lastName, const Specialization specialization, const int recBookNumber) : _firstName(firstName), _lastName(lastName), _specialization(specialization), _recBookNumber(recBookNumber)
+Student::Student(const std::string& firstName, const std::string& lastName, Specialization specialization, int recBookNumber) : _firstName(firstName), _lastName(lastName), _specialization(specialization), _recBookNumber(recBookNumber)
 {
 
 }

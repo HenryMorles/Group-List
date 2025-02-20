@@ -22,7 +22,7 @@ private:
 
 public:
 
-    Student(const std::string& firstName, const std::string& lastName, const Specialization specialization, const int recBookNumber);
+    Student(const std::string& firstName, const std::string& lastName, Specialization specialization, int recBookNumber);
 
     const std::string& GetFirstName() const;
     const std::string& GetLastName() const;

@@ -1,48 +1,121 @@
 #include "../headers/MenuActions.h"
 #include "../headers/Student.h"
 #include <iostream>
+#include <cctype>
 
 namespace MenuActions
 {
+    std::string GetValidStringInput(const std::string& prompt)
+    {
+        std::string value;
+        bool validInput;
+
+        do
+        {
+            std::cout << prompt;
+            std::cin >> value;
+
+            validInput = !value.empty();
+            for (char ch : value)
+            {
+                if (!std::isalpha(ch))
+                {
+                    validInput = false;
+                    break;
+                }
+            }
+
+            if (!validInput)
+            {
+                std::cout << "Invalid input. Please enter a name with letters only.\n";
+            }
+
+        } while (!validInput);
+
+        return value;
+    }
+
+    int GetValidIntInput(const std::string& prompt)
+    {
+        int value;
+        bool validInput;
+
+        do
+        {
+            std::cout << prompt;
+            std::cin >> value;
+            validInput = !std::cin.fail();
+
+            if (!validInput)
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number.\n";
+            }
+            else
+            {
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        } while (!validInput);
+
+        return value;
+    }
+
     std::string SpecializationToString(Specialization spec)
     {
         switch (spec)
         {
-        case MATHEMATICS: return "Mathematics";
-        case PHYSICS: return "Physics";
-        case ECONOMICS: return "Economics";
-        case COMPUTER_SCIENCE: return "Computer Science";
-        default: return "None";
+        case MATHEMATICS: return "Mathematics"; break;
+        case PHYSICS: return "Physics"; break;
+        case ECONOMICS: return "Economics"; break;
+        case COMPUTER_SCIENCE: return "Computer Science"; break;
+        default: return "None"; break;
         }
     }
 
     Specialization ChooseSpecialization()
     {
+        int choice;
+        bool validInput;
+
         std::cout << "Choose specialization:\n";
         std::cout << "1) Mathematics\n";
         std::cout << "2) Physics\n";
         std::cout << "3) Economics\n";
         std::cout << "4) Computer Science\n";
         std::cout << "0) None\n";
-        std::cout << "Enter choice: ";
-        int choice;
-        std::cin >> choice;
+
+        do
+        {
+            std::cout << "Enter choice: ";
+            std::cin >> choice;
+            validInput = !std::cin.fail() && choice >= 0 && choice <= 4;
+
+            if (!validInput)
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid choice. Please enter a number between 0 and 4: ";
+            }
+            else
+            {
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+        } while (!validInput);
 
         switch (choice)
         {
-        case 1: return MATHEMATICS;
-        case 2: return PHYSICS;
-        case 3: return ECONOMICS;
-        case 4: return COMPUTER_SCIENCE;
-        default: return NONE;
+        case 1: return MATHEMATICS; break;
+        case 2: return PHYSICS; break;
+        case 3: return ECONOMICS; break;
+        case 4: return COMPUTER_SCIENCE; break;
+        default: return NONE; break;
         }
     }
 
     void CreateGroup(std::vector<std::shared_ptr<Group>>& groups, IUserInterface& ui)
     {
-        std::cout << "Enter new group number: ";
-        int groupNumber;
-        std::cin >> groupNumber;
+        int groupNumber = GetValidIntInput("Enter new group number: ");
 
         auto newGroup = std::make_shared<Group>(std::vector<Student>{}, groupNumber);
         groups.push_back(newGroup);
@@ -64,18 +137,20 @@ namespace MenuActions
             std::cout << i + 1 << ") Group " << groups[i]->GetGroupNumber() << "\n";
         }
 
-        std::cout << "Select a group to delete (0 to cancel): ";
         int choice;
-        std::cin >> choice;
+        do
+        {
+            choice = GetValidIntInput("Select a group to delete (0 to cancel): ");
+            if (choice < 0 || choice > static_cast<int>(groups.size()))
+            {
+                std::cout << "Invalid selection. Try again.\n";
+            }
+        } while (choice < 0 || choice > static_cast<int>(groups.size()));
 
-        if (choice > 0 && choice <= static_cast<int>(groups.size()))
+        if (choice > 0)
         {
             groups.erase(groups.begin() + (choice - 1));
             ui.ShowMessage("Group deleted successfully!");
-        }
-        else
-        {
-            ui.ShowMessage("Invalid selection.");
         }
     }
 
@@ -93,36 +168,30 @@ namespace MenuActions
             std::cout << i + 1 << ") Group " << groups[i]->GetGroupNumber() << "\n";
         }
 
-        std::cout << "Select a group (0 to cancel): ";
         int choice;
-        std::cin >> choice;
-
-        if (choice > 0 && choice <= static_cast<int>(groups.size()))
+        do
         {
-            return groups[choice - 1];
-        }
+            choice = GetValidIntInput("Select a group (0 to cancel): ");
+            if (choice < 0 || choice > static_cast<int>(groups.size()))
+            {
+                std::cout << "Invalid selection. Try again.\n";
+            }
+        } while (choice < 0 || choice > static_cast<int>(groups.size()));
 
-        ui.ShowMessage("Invalid selection.");
-        return nullptr;
+        return (choice > 0) ? groups[choice - 1] : nullptr;
     }
 
-    void MenuActions::AddStudentToGroup(std::shared_ptr<Group> group, IUserInterface& ui, std::vector<std::shared_ptr<Group>>& groups)
+    void AddStudentToGroup(std::shared_ptr<Group> group, IUserInterface& ui, std::vector<std::shared_ptr<Group>>& groups)
     {
         if (!group)
         {
             throw std::runtime_error("No group selected.");
         }
 
-        std::cout << "Enter student first name: ";
-        std::string firstName;
-        std::cin >> firstName;
-        std::cout << "Enter student last name: ";
-        std::string lastName;
-        std::cin >> lastName;
-        std::cout << "Enter student record book number: ";
-        int recBookNumber;
-        std::cin >> recBookNumber;
+        std::string firstName = GetValidStringInput("Enter student first name: ");
+        std::string lastName = GetValidStringInput("Enter student last name: ");
 
+        int recBookNumber = GetValidIntInput("Enter student record book number: ");
         Specialization spec = ChooseSpecialization();
 
         auto [checkStudent, foundGroup] = Group::FindStudentFromAllGroups(groups, recBookNumber);
@@ -135,7 +204,7 @@ namespace MenuActions
         }
         else
         {
-            ui.ShowMessage("Error: Student with such rec book number already exists in group " +
+            ui.ShowMessage("Error: Student with such record book number already exists in group " +
                 std::to_string(foundGroup->GetGroupNumber()));
         }
     }
@@ -147,9 +216,7 @@ namespace MenuActions
             throw std::runtime_error("No group selected.");
         }
 
-        std::cout << "Enter student record book number to remove: ";
-        int recBookNumber;
-        std::cin >> recBookNumber;
+        int recBookNumber = GetValidIntInput("Enter student record book number to remove: ");
 
         try
         {
@@ -193,13 +260,8 @@ namespace MenuActions
             throw std::runtime_error("No group selected.");
         }
 
-        std::cout << "Enter student record book number to edit first name: ";
-        int recBookNumber;
-        std::cin >> recBookNumber;
-
-        std::cout << "Enter new first name: ";
-        std::string newFirstName;
-        std::cin >> newFirstName;
+        int recBookNumber = GetValidIntInput("Enter student record book number to edit first name: ");
+        std::string newFirstName = GetValidStringInput("Enter new first name: ");
 
         try
         {
@@ -219,13 +281,8 @@ namespace MenuActions
             throw std::runtime_error("No group selected.");
         }
 
-        std::cout << "Enter student record book number to edit last name: ";
-        int recBookNumber;
-        std::cin >> recBookNumber;
-
-        std::cout << "Enter new last name: ";
-        std::string newLastName;
-        std::cin >> newLastName;
+        int recBookNumber = GetValidIntInput("Enter student record book number to edit last name: ");
+        std::string newLastName = GetValidStringInput("Enter new last name: ");
 
         try
         {
@@ -245,10 +302,7 @@ namespace MenuActions
             throw std::runtime_error("No group selected.");
         }
 
-        std::cout << "Enter student record book number to edit specialization: ";
-        int recBookNumber;
-        std::cin >> recBookNumber;
-
+        int recBookNumber = GetValidIntInput("Enter student record book number to edit specialization: ");
         Specialization newSpec = ChooseSpecialization();
 
         try

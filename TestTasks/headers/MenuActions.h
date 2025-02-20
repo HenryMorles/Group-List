@@ -8,6 +8,9 @@
 
 namespace MenuActions
 {
+    int GetValidIntInput(const std::string& prompt);
+    std::string GetValidStringInput(const std::string& prompt);
+
     void CreateGroup(std::vector<std::shared_ptr<Group>>& groups, IUserInterface& ui);
     void DeleteGroup(std::vector<std::shared_ptr<Group>>& groups, IUserInterface& ui);
     std::shared_ptr<Group> SelectGroup(std::vector<std::shared_ptr<Group>>& groups, IUserInterface& ui);

@@ -1,10 +1,11 @@
 ﻿#include "../headers/Group.h"
 #include <stdexcept>
+#include <algorithm>
 
 
 Student* Group::FindStudentByRecBookNumber(int recBookNumber)
 {
-    auto it = std::find_if(_students.begin(), _students.end(),
+    const auto& it = std::find_if(_students.begin(), _students.end(),
         [recBookNumber](Student& student) { return student.GetRecBookNumber() == recBookNumber; });
 
     return (it != _students.end()) ? &(*it) : nullptr;
@@ -54,7 +55,6 @@ std::pair<Student*, std::shared_ptr<Group>> Group::FindStudentFromAllGroups(std:
     }
     return { nullptr, nullptr };
 }
-
 
 void Group::EditFirstName(int recBookNumber, const std::string& newFirstName)
 {

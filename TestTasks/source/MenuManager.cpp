@@ -20,6 +20,7 @@ void MenuManager::AddSubMenu(int option, const std::string& description, std::sh
 void MenuManager::Run()
 {
     int choice;
+    bool validChoice;
 
     do
     {
@@ -31,7 +32,17 @@ void MenuManager::Run()
 
         _userInterface.ShowMessage("\n==== " + _title + " ====\n");
         _userInterface.ShowMenu(menuItems);
-        choice = _userInterface.GetUserChoice();
+
+        do
+        {
+            choice = _userInterface.GetUserChoice();
+            validChoice = (_descriptions.find(choice) != _descriptions.end() || choice == 0);
+
+            if (!validChoice)
+            {
+                _userInterface.ShowMessage("Invalid choice. Please select a valid option.");
+            }
+        } while (!validChoice);
 
         if (choice == 0)
         {
@@ -44,10 +55,6 @@ void MenuManager::Run()
         else if (_submenus.find(choice) != _submenus.end())
         {
             _submenus[choice]->Run();
-        }
-        else
-        {
-            _userInterface.ShowMessage("Invalid choice. Try again.");
         }
 
     } while (choice != 0);

@@ -18,14 +18,32 @@ void ConsoleUI::ShowMessage(const std::string& message)
 int ConsoleUI::GetUserChoice()
 {
     int choice;
-    std::cin >> choice;
+    bool validInput;
+
+    do
+    {
+        std::cin >> choice;
+        validInput = !std::cin.fail();
+
+        if (!validInput)
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter a number: ";
+        }
+        else
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    } while (!validInput);
+
     return choice;
 }
 
 std::string ConsoleUI::GetUserInput(const std::string& prompt)
 {
     std::cout << prompt;
-    std::cin.ignore();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string input;
     std::getline(std::cin, input);
     return input;
