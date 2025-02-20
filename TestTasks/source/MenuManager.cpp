@@ -1,53 +1,53 @@
 #include "../headers/MenuManager.h"
 
-MenuManager::MenuManager(UserInterface& userInterface, const std::string& menuTitle) : userInterface(userInterface), title(menuTitle) 
+MenuManager::MenuManager(IUserInterface& userInterface, const std::string& menuTitle) : _userInterface(userInterface), _title(menuTitle)
 {
 
 }
 
-void MenuManager::addMenuItem(int option, const std::string& description, std::function<void()> action)
+void MenuManager::AddMenuItem(int option, const std::string& description, std::function<void()> action)
 {
-    actions[option] = action;
-    descriptions[option] = description;
+    _actions[option] = action;
+    _descriptions[option] = description;
 }
 
-void MenuManager::addSubMenu(int option, const std::string& description, std::shared_ptr<MenuManager> submenu)
+void MenuManager::AddSubMenu(int option, const std::string& description, std::shared_ptr<MenuManager> submenu)
 {
-    submenus[option] = submenu;
-    descriptions[option] = description;
+    _submenus[option] = submenu;
+    _descriptions[option] = description;
 }
 
-void MenuManager::run()
+void MenuManager::Run()
 {
     int choice;
 
     do
     {
         std::map<int, std::string> menuItems;
-        for (const auto& item : descriptions)
+        for (const auto& item : _descriptions)
         {
             menuItems[item.first] = item.second;
         }
 
-        userInterface.showMessage("\n==== " + title + " ====\n");
-        userInterface.showMenu(menuItems);
-        choice = userInterface.getUserChoice();
+        _userInterface.ShowMessage("\n==== " + _title + " ====\n");
+        _userInterface.ShowMenu(menuItems);
+        choice = _userInterface.GetUserChoice();
 
         if (choice == 0)
         {
-            userInterface.showMessage("Returning...");
+            _userInterface.ShowMessage("Returning...");
         }
-        else if (actions.find(choice) != actions.end())
+        else if (_actions.find(choice) != _actions.end())
         {
-            actions[choice]();
+            _actions[choice]();
         }
-        else if (submenus.find(choice) != submenus.end())
+        else if (_submenus.find(choice) != _submenus.end())
         {
-            submenus[choice]->run();
+            _submenus[choice]->Run();
         }
         else
         {
-            userInterface.showMessage("Invalid choice. Try again.");
+            _userInterface.ShowMessage("Invalid choice. Try again.");
         }
 
     } while (choice != 0);

@@ -22,15 +22,15 @@ private:
 
 public:
 
-    Student(const std::string& firstName, const std::string& lastName, Specialization specialization, int recBookNumber);
+    Student(const std::string& firstName, const std::string& lastName, const Specialization specialization, const int recBookNumber);
 
-    const std::string& getFirstName() const;
-    const std::string& getLastName() const;
-    Specialization getSpecialization() const;
-    int getRecBookNumber() const;
+    const std::string& GetFirstName() const;
+    const std::string& GetLastName() const;
+    Specialization GetSpecialization() const;
+    int GetRecBookNumber() const;
 
-    void setFirstName(const std::string& newFirstName);
-    void setLastName(const std::string& newLastName);
-    void setSpecialization(Specialization newSpecialization);
+    void SetFirstName(const std::string& newFirstName);
+    void SetLastName(const std::string& newLastName);
+    void SetSpecialization(const Specialization newSpecialization);
 };
 

@@ -1,41 +1,41 @@
 #include "../headers/Student.h"
 
-Student::Student(const std::string& firstName, const std::string& lastName, Specialization specialization, int recBookNumber) : _firstName(firstName), _lastName(lastName), _specialization(specialization), _recBookNumber(recBookNumber)
+Student::Student(const std::string& firstName, const std::string& lastName, const Specialization specialization, const int recBookNumber) : _firstName(firstName), _lastName(lastName), _specialization(specialization), _recBookNumber(recBookNumber)
 {
 
 }
 
-const std::string& Student::getFirstName() const
+const std::string& Student::GetFirstName() const
 {
     return _firstName;
 }
 
-const std::string& Student::getLastName() const
+const std::string& Student::GetLastName() const
 {
     return _lastName;
 }
 
-Specialization Student::getSpecialization() const
+Specialization Student::GetSpecialization() const
 {
     return _specialization;
 }
 
-int Student::getRecBookNumber() const
+int Student::GetRecBookNumber() const
 {
     return _recBookNumber;
 }
 
-void Student::setFirstName(const std::string& newFirstName)
+void Student::SetFirstName(const std::string& newFirstName)
 {
     _firstName = newFirstName;
 }
 
-void Student::setLastName(const std::string& newLastName)
+void Student::SetLastName(const std::string& newLastName)
 {
     _lastName = newLastName;
 }
 
-void Student::setSpecialization(Specialization newSpecialization)
+void Student::SetSpecialization(const Specialization newSpecialization)
 {
     _specialization = newSpecialization;
 }

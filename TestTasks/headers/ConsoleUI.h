@@ -1,17 +1,14 @@
 #pragma once
 
 
-#include "UserInterface.h"
+#include "IUserInterface.h"
 
-class ConsoleUI : public UserInterface
+class ConsoleUI : public IUserInterface
 {
 public:
 
-    void showMenu(const std::map<int, std::string>& menuItems) override;
-
-    void showMessage(const std::string& message) override;
-
-    int getUserChoice() override;
-
-    std::string getUserInput(const std::string& prompt) override;
+    void ShowMenu(const std::map<int, std::string>& menuItems) override;
+    void ShowMessage(const std::string& message) override;
+    int GetUserChoice() override;
+    std::string GetUserInput(const std::string& prompt) override;
 };

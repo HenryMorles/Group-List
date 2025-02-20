@@ -1,6 +1,6 @@
 #include "../headers/ConsoleUI.h"
 
-void ConsoleUI::showMenu(const std::map<int, std::string>& menuItems)
+void ConsoleUI::ShowMenu(const std::map<int, std::string>& menuItems)
 {
     for (const auto& item : menuItems)
     {
@@ -10,23 +10,23 @@ void ConsoleUI::showMenu(const std::map<int, std::string>& menuItems)
     std::cout << "Select an option: ";
 }
 
-void ConsoleUI::showMessage(const std::string& message)
+void ConsoleUI::ShowMessage(const std::string& message)
 {
     std::cout << message << std::endl;
 }
 
-int ConsoleUI::getUserChoice()
+int ConsoleUI::GetUserChoice()
 {
     int choice;
     std::cin >> choice;
     return choice;
 }
 
-std::string ConsoleUI::getUserInput(const std::string& prompt)
+std::string ConsoleUI::GetUserInput(const std::string& prompt)
 {
     std::cout << prompt;
-    std::string input;
     std::cin.ignore();
+    std::string input;
     std::getline(std::cin, input);
     return input;
 }

@@ -18,8 +18,10 @@ private:
 public:
 
 	Group(std::vector<Student> students, int groupNumber);
+	Group(std::initializer_list<Student> students, int groupNumber);
 
 	void Add(const Student& student);
+	static std::pair<Student*, std::shared_ptr<Group>> FindStudentFromAllGroups(std::vector<std::shared_ptr<Group>>& groups, int recBookNumber);
 
 	void EditFirstName(const int recBookNumber, const std::string& newFirstName);
 	void EditLastName(const int recBookNumber, const std::string& newLastName);
@@ -30,7 +32,6 @@ public:
 	size_t GetStudentCount() const;
 
 	std::unique_ptr<Student> Delete(const int recBookNumber);
-	const Student& Find(const std::string& firstName, const std::string& lastName) const;
 
 	Student& operator[] (int recBookNumber);
 	const Student& operator[] (int recBookNumber) const;
