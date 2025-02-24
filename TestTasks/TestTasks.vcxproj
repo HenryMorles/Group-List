@@ -19,15 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Deanery.h" />
     <ClInclude Include="headers\ConsoleUI.h" />
     <ClInclude Include="headers\Group.h" />
     <ClInclude Include="headers\Student.h" />
-    <ClInclude Include="headers\IUserInterface.h" />
     <ClInclude Include="headers\MenuManager.h" />
-    <ClInclude Include="headers\MenuActions.h" />
+    <ClInclude Include="headers\MenuAction.h" />
+    <ClInclude Include="headers\IUserInterface.h" />
+    <ClInclude Include="headers\Specelization.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\MenuActions.cpp" />
+    <ClCompile Include="source\Deanery.cpp" />
+    <ClCompile Include="source\IUserInterface.cpp" />
+    <ClCompile Include="source\MenuAction.cpp" />
     <ClCompile Include="source\MenuManager.cpp" />
     <ClCompile Include="source\ConsoleUI.cpp" />
     <ClCompile Include="source\Group.cpp" />

@@ -21,16 +21,22 @@
     <ClInclude Include="headers\Group.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="headers\IUserInterface.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="headers\ConsoleUI.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="headers\MenuManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="headers\MenuActions.h">
+    <ClInclude Include="headers\MenuAction.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IUserInterface.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Specelization.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Deanery.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +56,13 @@
     <ClCompile Include="source\MenuManager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="source\MenuActions.cpp">
+    <ClCompile Include="source\MenuAction.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IUserInterface.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Deanery.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

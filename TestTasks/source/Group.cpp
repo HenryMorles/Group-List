@@ -6,7 +6,8 @@
 Student* Group::FindStudentByRecBookNumber(int recBookNumber)
 {
     const auto& it = std::find_if(_students.begin(), _students.end(),
-        [recBookNumber](Student& student) { return student.GetRecBookNumber() == recBookNumber; });
+        [recBookNumber](Student& student) 
+        { return student.GetRecBookNumber() == recBookNumber; });
 
     return (it != _students.end()) ? &(*it) : nullptr;
 }
@@ -14,17 +15,19 @@ Student* Group::FindStudentByRecBookNumber(int recBookNumber)
 const Student* Group::FindStudentByRecBookNumber(int recBookNumber) const
 {
     auto it = std::find_if(_students.begin(), _students.end(),
-        [recBookNumber](const Student& student) { return student.GetRecBookNumber() == recBookNumber; });
+        [recBookNumber](const Student& student) 
+        { return student.GetRecBookNumber() == recBookNumber; });
 
     return (it != _students.end()) ? &(*it) : nullptr;
 }
 
-Group::Group(std::vector<Student> students, int groupNumber) : _students(std::move(students)), _groupNumber(groupNumber)
+Group::Group(const std::vector<Student>& students, int groupNumber)
+    : _students(students), _groupNumber(groupNumber)
 {
-
 }
 
-Group::Group(std::initializer_list<Student> students, int groupNumber) : _students(students), _groupNumber(groupNumber) 
+Group::Group(std::initializer_list<Student> students, int groupNumber)
+    : _students(students), _groupNumber(groupNumber) 
 {
 
 }
@@ -41,19 +44,6 @@ void Group::Add(const Student& student)
     {
         throw std::runtime_error("Student with such rec book number already exists");
     }
-}
-
-std::pair<Student*, std::shared_ptr<Group>> Group::FindStudentFromAllGroups(std::vector<std::shared_ptr<Group>>& groups, int recBookNumber)
-{
-    for (auto& group : groups)
-    {
-        Student* student = group->FindStudentByRecBookNumber(recBookNumber);
-        if (student)
-        {
-            return { student, group };
-        }
-    }
-    return { nullptr, nullptr };
 }
 
 void Group::EditFirstName(int recBookNumber, const std::string& newFirstName)
@@ -82,7 +72,8 @@ void Group::EditLastName(const int recBookNumber, const std::string& newLastName
     }
 }
 
-void Group::EditSpecialization(const int recBookNumber, const Specialization newSpecialization)
+void Group::EditSpecialization(const int recBookNumber, 
+    const Specialization newSpecialization)
 {
     Student* student = FindStudentByRecBookNumber(recBookNumber);
     if (student)
@@ -119,7 +110,8 @@ std::unique_ptr<Student> Group::Delete(int recBookNumber)
         auto removedStudent = std::make_unique<Student>(std::move(*student));
 
         _students.erase(std::remove_if(_students.begin(), _students.end(),
-            [recBookNumber](const Student& s) { return s.GetRecBookNumber() == recBookNumber; }), _students.end());
+            [recBookNumber](const Student& s) 
+            { return s.GetRecBookNumber() == recBookNumber; }), _students.end());
 
         return removedStudent;
     }
@@ -127,26 +119,26 @@ std::unique_ptr<Student> Group::Delete(int recBookNumber)
     throw std::runtime_error("Student is not found");
 }
 
-Student& Group::operator[](int recBookNumber)
+Student* Group::operator[](int recBookNumber)
 {
     Student* student = FindStudentByRecBookNumber(recBookNumber);
 
     if (student)
     {
-        return *student;
+        return student;
     }
 
-    throw std::runtime_error("Student is not found");
+    return nullptr;
 }
 
-const Student& Group::operator[](int recBookNumber) const
+const Student* Group::operator[](int recBookNumber) const
 {
     const Student* student = FindStudentByRecBookNumber(recBookNumber);
 
     if (student)
     {
-        return *student;
+        return student;
     }
 
-    throw std::runtime_error("Student is not found");
+    return nullptr;
 }

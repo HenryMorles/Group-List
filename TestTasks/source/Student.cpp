@@ -1,6 +1,9 @@
 #include "../headers/Student.h"
 
-Student::Student(const std::string& firstName, const std::string& lastName, Specialization specialization, int recBookNumber) : _firstName(firstName), _lastName(lastName), _specialization(specialization), _recBookNumber(recBookNumber)
+Student::Student(const std::string& firstName, const std::string& lastName, 
+    Specialization specialization, int recBookNumber, int groupNumber)
+    : _firstName(firstName), _lastName(lastName), _specialization(specialization),
+    _recBookNumber(recBookNumber), _groupNumber(groupNumber)
 {
 
 }
@@ -25,6 +28,11 @@ int Student::GetRecBookNumber() const
     return _recBookNumber;
 }
 
+int Student::GetGroupNumber() const
+{
+    return _groupNumber;
+}
+
 void Student::SetFirstName(const std::string& newFirstName)
 {
     _firstName = newFirstName;
@@ -35,7 +43,12 @@ void Student::SetLastName(const std::string& newLastName)
     _lastName = newLastName;
 }
 
-void Student::SetSpecialization(const Specialization newSpecialization)
+void Student::SetSpecialization(Specialization newSpecialization)
 {
     _specialization = newSpecialization;
+}
+
+void Student::GetGroupNumber(int newGroupNumber)
+{
+    _groupNumber = newGroupNumber;
 }

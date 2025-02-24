@@ -1,0 +1,13 @@
+#ifndef SPECIALIZATION_H
+#define SPECIALIZATION_H
+
+enum Specialization
+{
+    NONE,
+    MATHEMATICS,
+    PHYSICS,
+    ECONOMICS,
+    COMPUTER_SCIENCE
+};
+
+#endif // SPECIALIZATION_H
